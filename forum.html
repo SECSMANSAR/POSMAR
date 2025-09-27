@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Aspirasi - POSMAR OSIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar-scroll {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .form-floating {
+            position: relative;
+        }
+        
+        .form-floating input,
+        .form-floating textarea {
+            padding: 1rem 0.75rem 0.5rem;
+        }
+        
+        .form-floating label {
+            position: absolute;
+            top: 0;
+            left: 0.75rem;
+            height: 100%;
+            padding: 1rem 0;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+            color: #6b7280;
+        }
+        
+        .form-floating input:focus ~ label,
+        .form-floating input:not(:placeholder-shown) ~ label,
+        .form-floating textarea:focus ~ label,
+        .form-floating textarea:not(:placeholder-shown) ~ label {
+            opacity: 0.65;
+            transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+     Navbar 
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 navbar-scroll">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">POSMAR</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
+                    <a href="event.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Event</a>
+                    <a href="dokumentasi.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dokumentasi</a>
+                    <a href="forum.html" class="text-blue-600 font-medium">Forum Aspirasi</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="adminLoginBtn" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                        <i class="fas fa-user-shield mr-1"></i> Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+     Hero Section 
+    <section class="pt-24 pb-12 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Forum Aspirasi Siswa</h1>
+            <p class="text-xl text-green-100 fade-in">Sampaikan aspirasi, saran, dan kritik Anda untuk kemajuan sekolah</p>
+        </div>
+    </section>
+
+     Main Content 
+    <div id="mainContent">
+         Aspiration Form 
+        <section class="py-12 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Kirim Aspirasi Anda</h2>
+                    <p class="text-xl text-gray-600">Suara Anda penting untuk kemajuan sekolah kita bersama</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-xl p-8 fade-in">
+                    <form id="aspirationForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-floating">
+                                <input type="text" id="studentName" name="studentName" placeholder=" " required 
+                                       class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <label for="studentName">Nama Lengkap</label>
+                            </div>
+                            
+                            <div class="form-floating">
+                                <input type="text" id="studentClass" name="studentClass" placeholder=" " required 
+                                       class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <label for="studentClass">Kelas</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <select id="category" name="category" required 
+                                    class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent p-4">
+                                <option value="">Pilih Kategori</option>
+                                <option value="fasilitas">Fasilitas Sekolah</option>
+                                <option value="kegiatan">Kegiatan OSIS</option>
+                                <option value="pembelajaran">Pembelajaran</option>
+                                <option value="kantin">Kantin</option>
+                                <option value="kebersihan">Kebersihan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <input type="text" id="subject" name="subject" placeholder=" " required 
+                                   class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label for="subject">Judul Aspirasi</label>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <textarea id="message" name="message" rows="6" placeholder=" " required 
+                                      class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
+                            <label for="message">Isi Aspirasi</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="anonymous" name="anonymous" class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="anonymous" class="text-gray-700">Kirim sebagai anonim</label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Kirim Aspirasi
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+         Statistics 
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Statistik Aspirasi</h2>
+                    <p class="text-xl text-gray-600">Data aspirasi yang telah diterima dan ditindaklanjuti</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="fade-in">
+                        <div class="text-4xl font-bold text-blue-600 mb-2" id="totalAspirations">0</div>
+                        <div class="text-gray-600">Total Aspirasi</div>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.1s">
+                        <div class="text-4xl font-bold text-green-600 mb-2" id="processedAspirations">0</div>
+                        <div class="text-gray-600">Ditindaklanjuti</div>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.2s">
+                        <div class="text-4xl font-bold text-orange-600 mb-2" id="pendingAspirations">0</div>
+                        <div class="text-gray-600">Dalam Proses</div>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.3s">
+                        <div class="text-4xl font-bold text-purple-600 mb-2">98%</div>
+                        <div class="text-gray-600">Tingkat Respon</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+     Admin Login Modal 
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <i class="fas fa-user-shield text-4xl text-blue-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-900">Login Admin OSIS</h2>
+                <p class="text-gray-600">Masuk untuk melihat aspirasi siswa</p>
+            </div>
+            
+            <form id="adminLoginForm" class="space-y-4">
+                <div>
+                    <input type="text" id="adminUsername" placeholder="Username" required 
+                           class="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <input type="password" id="adminPassword" placeholder="Password" required 
+                           class="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Login
+                </button>
+            </form>
+            
+            <button id="closeAdminModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+     Admin Dashboard 
+    <div id="adminDashboard" class="hidden">
+        <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-4">Dashboard Admin OSIS</h1>
+                        <p class="text-xl text-blue-100">Kelola aspirasi siswa SMANSAR</p>
+                    </div>
+                    <button id="logoutBtn" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <button class="status-filter active px-4 py-2 rounded-lg bg-blue-600 text-white font-medium" data-status="all">
+                            Semua
+                        </button>
+                        <button class="status-filter px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300" data-status="pending">
+                            Pending
+                        </button>
+                        <button class="status-filter px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300" data-status="processed">
+                            Diproses
+                        </button>
+                        <button class="status-filter px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300" data-status="completed">
+                            Selesai
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="aspirationsContainer" class="space-y-6">
+                     Aspirations will be populated by JavaScript 
+                </div>
+            </div>
+        </section>
+    </div>
+
+     Footer 
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">POSMAR OSIS</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Organisasi Siswa Intra Sekolah SMANSAR yang berkomitmen untuk mengembangkan potensi siswa.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Kontak</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fas fa-envelope mr-2"></i> osis@smansar.sch.id</p>
+                        <p><i class="fas fa-phone mr-2"></i> (021) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> SMANSAR, Jakarta</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Media Sosial</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 POSMAR OSIS SMANSAR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample aspirations data
+        let aspirations = JSON.parse(localStorage.getItem('aspirations')) || [];
+        let isAdminLoggedIn = false;
+
+        // Form submission
+        document.getElementById('aspirationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const aspiration = {
+                id: Date.now(),
+                name: formData.get('anonymous') ? 'Anonim' : formData.get('studentName'),
+                class: formData.get('studentClass'),
+                category: formData.get('category'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                date: new Date().toLocaleDateString('id-ID'),
+                status: 'pending',
+                anonymous: formData.get('anonymous') ? true : false
+            };
+            
+            aspirations.push(aspiration);
+            localStorage.setItem('aspirations', JSON.stringify(aspirations));
+            
+            // Show success message
+            alert('Aspirasi Anda berhasil dikirim! Terima kasih atas partisipasinya.');
+            this.reset();
+            
+            updateStatistics();
+        });
+
+        // Admin login
+        document.getElementById('adminLoginBtn').addEventListener('click', () => {
+            document.getElementById('adminModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeAdminModal').addEventListener('click', () => {
+            document.getElementById('adminModal').classList.add('hidden');
+        });
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Simple authentication (in real app, use proper authentication)
+            if (username === 'admin' && password === 'osis2025') {
+                isAdminLoggedIn = true;
+                document.getElementById('adminModal').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                renderAspirations();
+            } else {
+                alert('Username atau password salah!');
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            isAdminLoggedIn = false;
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+        });
+
+        // Render aspirations for admin
+        function renderAspirations(filter = 'all') {
+            const container = document.getElementById('aspirationsContainer');
+            const filteredAspirations = filter === 'all' ? aspirations : aspirations.filter(a => a.status === filter);
+            
+            container.innerHTML = '';
+            
+            filteredAspirations.forEach(aspiration => {
+                const statusColor = {
+                    'pending': 'bg-yellow-100 text-yellow-800',
+                    'processed': 'bg-blue-100 text-blue-800',
+                    'completed': 'bg-green-100 text-green-800'
+                };
+                
+                const aspirationCard = `
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">${aspiration.subject}</h3>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-user mr-1"></i>${aspiration.name}</span>
+                                    <span><i class="fas fa-graduation-cap mr-1"></i>${aspiration.class}</span>
+                                    <span><i class="fas fa-calendar mr-1"></i>${aspiration.date}</span>
+                                    <span><i class="fas fa-tag mr-1"></i>${aspiration.category}</span>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium ${statusColor[aspiration.status]}">
+                                ${aspiration.status === 'pending' ? 'Pending' : aspiration.status === 'processed' ? 'Diproses' : 'Selesai'}
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-4">${aspiration.message}</p>
+                        
+                        <div class="flex space-x-2">
+                            <select onchange="updateStatus(${aspiration.id}, this.value)" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                <option value="pending" ${aspiration.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                <option value="processed" ${aspiration.status === 'processed' ? 'selected' : ''}>Diproses</option>
+                                <option value="completed" ${aspiration.status === 'completed' ? 'selected' : ''}>Selesai</option>
+                            </select>
+                            <button onclick="deleteAspiration(${aspiration.id})" class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition-colors">
+                                <i class="fas fa-trash mr-1"></i>Hapus
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += aspirationCard;
+            });
+        }
+
+        // Update aspiration status
+        function updateStatus(id, newStatus) {
+            aspirations = aspirations.map(a => 
+                a.id === id ? {...a, status: newStatus} : a
+            );
+            localStorage.setItem('aspirations', JSON.stringify(aspirations));
+            updateStatistics();
+        }
+
+        // Delete aspiration
+        function deleteAspiration(id) {
+            if (confirm('Yakin ingin menghapus aspirasi ini?')) {
+                aspirations = aspirations.filter(a => a.id !== id);
+                localStorage.setItem('aspirations', JSON.stringify(aspirations));
+                renderAspirations();
+                updateStatistics();
+            }
+        }
+
+        // Status filter
+        document.querySelectorAll('.status-filter').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.status-filter').forEach(b => {
+                    b.classList.remove('active', 'bg-blue-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                btn.classList.add('active', 'bg-blue-600', 'text-white');
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+                
+                const filter = btn.getAttribute('data-status');
+                renderAspirations(filter);
+            });
+        });
+
+        // Update statistics
+        function updateStatistics() {
+            const total = aspirations.length;
+            const processed = aspirations.filter(a => a.status === 'completed').length;
+            const pending = aspirations.filter(a => a.status === 'pending' || a.status === 'processed').length;
+            
+            document.getElementById('totalAspirations').textContent = total;
+            document.getElementById('processedAspirations').textContent = processed;
+            document.getElementById('pendingAspirations').textContent = pending;
+        }
+
+        // Fade in animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatistics();
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

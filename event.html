@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event - POSMAR OSIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar-scroll {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+     Navbar 
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 navbar-scroll">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">POSMAR</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
+                    <a href="event.html" class="text-blue-600 font-medium">Event</a>
+                    <a href="dokumentasi.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Dokumentasi</a>
+                    <a href="forum.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Forum Aspirasi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+     Hero Section 
+    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Event POSMAR</h1>
+            <p class="text-xl text-blue-100 fade-in">Berbagai kegiatan menarik dan bermanfaat untuk siswa</p>
+        </div>
+    </section>
+
+     Event Stats 
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-in">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">25+</div>
+                    <div class="text-gray-600">Event Tahun Ini</div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.1s">
+                    <div class="text-3xl font-bold text-green-600 mb-2">500+</div>
+                    <div class="text-gray-600">Peserta Aktif</div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.2s">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">15</div>
+                    <div class="text-gray-600">Kategori Event</div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.3s">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">98%</div>
+                    <div class="text-gray-600">Tingkat Kepuasan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     Event Categories 
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Kategori Event</h2>
+                <p class="text-xl text-gray-600">Pilih kategori event yang menarik untuk Anda</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-blue-600 hover:text-white transition-colors" data-filter="all">
+                    Semua Event
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-blue-600 hover:text-white transition-colors" data-filter="seminar">
+                    Seminar
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-blue-600 hover:text-white transition-colors" data-filter="lomba">
+                    Lomba
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-blue-600 hover:text-white transition-colors" data-filter="sosial">
+                    Sosial
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-blue-600 hover:text-white transition-colors" data-filter="workshop">
+                    Workshop
+                </button>
+            </div>
+            
+            <div id="events-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 Events will be populated by JavaScript 
+            </div>
+        </div>
+    </section>
+
+     Footer 
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">POSMAR OSIS</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Organisasi Siswa Intra Sekolah SMANSAR yang berkomitmen untuk mengembangkan potensi siswa.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Kontak</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fas fa-envelope mr-2"></i> osis@smansar.sch.id</p>
+                        <p><i class="fas fa-phone mr-2"></i> (021) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> SMANSAR, Jakarta</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Media Sosial</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 POSMAR OSIS SMANSAR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample events data
+        const events = [
+            {
+                id: 1,
+                title: "Seminar Motivasi Ujian Nasional",
+                date: "15 Januari 2025",
+                category: "seminar",
+                description: "Seminar motivasi untuk siswa kelas 12 dalam menghadapi ujian nasional dengan pembicara inspiratif",
+                participants: 150,
+                location: "Aula Sekolah",
+                status: "Pendaftaran Dibuka",
+                color: "from-blue-500 to-purple-600"
+            },
+            {
+                id: 2,
+                title: "Lomba Kreativitas Antar Kelas",
+                date: "20 Januari 2025",
+                category: "lomba",
+                description: "Kompetisi kreativitas antar kelas dalam berbagai kategori seni dan budaya",
+                participants: 200,
+                location: "Lapangan Sekolah",
+                status: "Segera Dibuka",
+                color: "from-green-500 to-teal-600"
+            },
+            {
+                id: 3,
+                title: "Bakti Sosial Panti Asuhan",
+                date: "25 Januari 2025",
+                category: "sosial",
+                description: "Kegiatan bakti sosial ke panti asuhan dan pembagian sembako untuk masyarakat",
+                participants: 80,
+                location: "Panti Asuhan Harapan",
+                status: "Pendaftaran Dibuka",
+                color: "from-orange-500 to-red-600"
+            },
+            {
+                id: 4,
+                title: "Workshop Fotografi",
+                date: "30 Januari 2025",
+                category: "workshop",
+                description: "Workshop fotografi dasar untuk siswa yang tertarik dengan dunia photography",
+                participants: 50,
+                location: "Lab Komputer",
+                status: "Terbatas",
+                color: "from-purple-500 to-pink-600"
+            },
+            {
+                id: 5,
+                title: "Seminar Karir dan Masa Depan",
+                date: "5 Februari 2025",
+                category: "seminar",
+                description: "Seminar tentang pilihan karir dan persiapan masa depan setelah lulus SMA",
+                participants: 180,
+                location: "Aula Sekolah",
+                status: "Segera Dibuka",
+                color: "from-indigo-500 to-blue-600"
+            },
+            {
+                id: 6,
+                title: "Lomba Debat Bahasa Indonesia",
+                date: "10 Februari 2025",
+                category: "lomba",
+                description: "Kompetisi debat bahasa Indonesia tingkat sekolah dengan tema pendidikan",
+                participants: 60,
+                location: "Ruang Kelas 12A",
+                status: "Pendaftaran Dibuka",
+                color: "from-yellow-500 to-orange-600"
+            }
+        ];
+
+        // Render events
+        function renderEvents(eventsToShow) {
+            const container = document.getElementById('events-container');
+            container.innerHTML = '';
+            
+            eventsToShow.forEach((event, index) => {
+                const eventCard = `
+                    <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in" style="animation-delay: ${index * 0.1}s">
+                        <div class="h-48 bg-gradient-to-r ${event.color}"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-sm text-blue-600 font-semibold">${event.date}</span>
+                                <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">${event.status}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">${event.title}</h3>
+                            <p class="text-gray-600 mb-4">${event.description}</p>
+                            <div class="space-y-2 text-sm text-gray-500 mb-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>${event.participants} peserta</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>${event.location}</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                                Daftar Sekarang
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += eventCard;
+            });
+            
+            // Re-observe new elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                const filteredEvents = filter === 'all' ? events : events.filter(event => event.category === filter);
+                
+                renderEvents(filteredEvents);
+            });
+        });
+
+        // Fade in animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEvents(events);
+            
+            // Observe fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
