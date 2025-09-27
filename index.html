@@ -6,294 +6,424 @@
     <title>POSMAR OSIS - SMANSAR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Space Grotesk', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-50">
-    <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 font-sans">
+     Modern glassmorphism navbar with enhanced design 
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center floating-element">
-                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg floating-element">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
                     </div>
-                    <span class="text-xl font-bold text-gray-900 text-gradient">POSMAR</span>
+                    <div>
+                        <span class="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">POSMAR</span>
+                        <div class="text-xs text-slate-500 font-medium">OSIS SMANSAR</div>
+                    </div>
                 </div>
                 
-                <div class="hidden md:flex space-x-8">
-                    <a href="#beranda" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">Beranda</a>
-                    <a href="event.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">Event</a>
-                    <a href="dokumentasi.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">Dokumentasi</a>
-                    <a href="forum.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">Forum Aspirasi</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="nav-link relative text-slate-700 hover:text-blue-600 font-medium transition-all duration-300 group">
+                        Beranda
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="event.html" class="nav-link relative text-slate-700 hover:text-blue-600 font-medium transition-all duration-300 group">
+                        Event
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="dokumentasi.html" class="nav-link relative text-slate-700 hover:text-blue-600 font-medium transition-all duration-300 group">
+                        Dokumentasi
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="forum.html" class="nav-link relative text-slate-700 hover:text-blue-600 font-medium transition-all duration-300 group">
+                        Forum
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="admin.html" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+                        Admin
+                    </a>
                 </div>
                 
-                <!-- Enhanced mobile menu button with icon toggle -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i id="mobile-menu-icon" class="fas fa-bars text-gray-700 text-xl"></i>
+                <button id="mobile-menu-btn" class="md:hidden p-3 rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+                    <i id="mobile-menu-icon" class="fas fa-bars text-slate-700 text-xl"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Fixed mobile menu structure and animation -->
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t shadow-lg">
-            <div class="px-4 py-2 space-y-2">
-                <a href="#beranda" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors mobile-menu-link">Beranda</a>
-                <a href="event.html" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors mobile-menu-link">Event</a>
-                <a href="dokumentasi.html" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors mobile-menu-link">Dokumentasi</a>
-                <a href="forum.html" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors mobile-menu-link">Forum Aspirasi</a>
+         Enhanced mobile menu with glassmorphism 
+        <div id="mobile-menu" class="md:hidden hidden bg-white/90 backdrop-blur-xl border-t border-white/20 shadow-2xl">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#beranda" class="block py-3 text-slate-700 hover:text-blue-600 transition-colors mobile-menu-link font-medium">Beranda</a>
+                <a href="event.html" class="block py-3 text-slate-700 hover:text-blue-600 transition-colors mobile-menu-link font-medium">Event</a>
+                <a href="dokumentasi.html" class="block py-3 text-slate-700 hover:text-blue-600 transition-colors mobile-menu-link font-medium">Dokumentasi</a>
+                <a href="forum.html" class="block py-3 text-slate-700 hover:text-blue-600 transition-colors mobile-menu-link font-medium">Forum</a>
+                <a href="admin.html" class="block py-3 text-slate-700 hover:text-blue-600 transition-colors mobile-menu-link font-medium">Admin</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="beranda" class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-        <!-- Added floating background elements -->
+     Immersive hero section with 3D elements and modern typography 
+    <section id="beranda" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+         Animated background elements 
         <div class="absolute inset-0">
-            <div class="floating-element absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
-            <div class="floating-element absolute top-40 right-20 w-16 h-16 bg-blue-300/20 rounded-full" style="animation-delay: -2s;"></div>
-            <div class="floating-element absolute bottom-40 left-20 w-24 h-24 bg-white/5 rounded-full" style="animation-delay: -4s;"></div>
-            <div class="floating-element absolute bottom-20 right-10 w-12 h-12 bg-blue-200/30 rounded-full" style="animation-delay: -1s;"></div>
+            <div class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-400/20 to-indigo-500/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-full blur-3xl animate-float-delayed"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-float-slow"></div>
         </div>
         
-        <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">
-                POSMAR
-                <span class="block text-3xl md:text-4xl font-normal mt-2 text-blue-200">OSIS SMANSAR</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-blue-100 animate-fade-in-up" style="animation-delay: 0.2s">
-                Wadah kreativitas, aspirasi, dan kebersamaan siswa
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.4s">
-                <a href="event.html" class="btn-primary bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
-                    Lihat Event
+         3D floating elements 
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="floating-3d absolute top-32 left-16 w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-2xl"></div>
+            <div class="floating-3d absolute top-48 right-24 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl shadow-xl" style="animation-delay: -2s;"></div>
+            <div class="floating-3d absolute bottom-40 left-32 w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl shadow-2xl" style="animation-delay: -4s;"></div>
+            <div class="floating-3d absolute bottom-32 right-16 w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-xl" style="animation-delay: -1s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto text-center px-4 relative z-10">
+             Modern immersive typography inspired by design 
+            <div class="mb-8">
+                <h1 class="text-8xl md:text-9xl font-display font-black mb-4 leading-none">
+                    <span class="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent animate-fade-in-up">
+                        IMMERSIVE
+                    </span>
+                </h1>
+                <div class="text-2xl md:text-3xl font-display font-medium text-slate-600 animate-fade-in-up" style="animation-delay: 0.2s">
+                    POSMAR OSIS Experience
+                </div>
+            </div>
+            
+            <div class="max-w-2xl mx-auto mb-12 animate-fade-in-up" style="animation-delay: 0.4s">
+                <p class="text-xl md:text-2xl text-slate-600 leading-relaxed font-light">
+                    Sebuah pengalaman interaktif dan kreatif yang memadukan dunia nyata dengan imajinasi siswa SMANSAR
+                </p>
+            </div>
+            
+             Modern CTA buttons with glassmorphism 
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style="animation-delay: 0.6s">
+                <a href="event.html" class="group relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden">
+                    <span class="relative z-10">VIEW PROJECT</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="forum.html" class="btn-secondary border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105">
-                    Kirim Aspirasi
+                <a href="forum.html" class="group relative bg-white/10 backdrop-blur-sm border border-white/20 text-slate-700 px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-white/20 hover:shadow-xl hover:scale-105 transition-all duration-300">
+                    <span class="relative z-10">KIRIM ASPIRASI</span>
                 </a>
+            </div>
+            
+             Project info card inspired by design 
+            <div class="mt-16 max-w-md mx-auto animate-fade-in-up" style="animation-delay: 0.8s">
+                <div class="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-sm font-medium text-slate-600">Website</span>
+                        </div>
+                        <span class="text-sm font-medium text-slate-500">OSIS SMANSAR</span>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-slate-900 mb-3">The Creative Hub</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Platform digital yang menghubungkan kreativitas siswa dengan teknologi modern untuk menciptakan pengalaman yang tak terlupakan.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <!-- Added new stats section with counter animations -->
-    <section class="py-16 bg-white">
+     Modern stats section with enhanced counters 
+    <section class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="animate-counter">
-                    <div class="text-4xl font-bold text-blue-600 mb-2" data-count="500">0</div>
-                    <div class="text-gray-600">Siswa Aktif</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center animate-counter group">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <div class="text-5xl font-display font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3" data-count="500">0</div>
+                        <div class="text-slate-600 font-medium">Siswa Aktif</div>
+                    </div>
                 </div>
-                <div class="animate-counter">
-                    <div class="text-4xl font-bold text-green-600 mb-2" data-count="25">0</div>
-                    <div class="text-gray-600">Event Tahunan</div>
+                <div class="text-center animate-counter group">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <div class="text-5xl font-display font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3" data-count="25">0</div>
+                        <div class="text-slate-600 font-medium">Event Tahunan</div>
+                    </div>
                 </div>
-                <div class="animate-counter">
-                    <div class="text-4xl font-bold text-purple-600 mb-2" data-count="15">0</div>
-                    <div class="text-gray-600">Divisi</div>
+                <div class="text-center animate-counter group">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <div class="text-5xl font-display font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3" data-count="15">0</div>
+                        <div class="text-slate-600 font-medium">Divisi</div>
+                    </div>
                 </div>
-                <div class="animate-counter">
-                    <div class="text-4xl font-bold text-orange-600 mb-2" data-count="3">0</div>
-                    <div class="text-gray-600">Tahun Berdiri</div>
+                <div class="text-center animate-counter group">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <div class="text-5xl font-display font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-3" data-count="3">0</div>
+                        <div class="text-slate-600 font-medium">Tahun Berdiri</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Event Section -->
-    <section class="py-20 bg-white">
+     Enhanced event section with modern cards 
+    <section class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Event Terbaru</h2>
-                <p class="text-xl text-gray-600">Kegiatan dan acara menarik dari OSIS</p>
+            <div class="text-center mb-20 scroll-reveal">
+                <h2 class="text-6xl font-display font-black text-slate-900 mb-6">Event Terbaru</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    Kegiatan dan acara menarik yang menginspirasi kreativitas dan inovasi siswa
+                </p>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal">
-                    <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <i class="fas fa-microphone text-2xl"></i>
+                <div class="group card-hover scroll-reveal">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500">
+                        <div class="h-64 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-microphone text-white text-4xl opacity-80"></i>
+                            </div>
+                            <div class="absolute top-6 left-6">
+                                <span class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">15 Jan 2025</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-blue-600 font-semibold mb-2">15 Januari 2025</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Seminar Motivasi</h3>
-                        <p class="text-gray-600 mb-4">Seminar motivasi untuk siswa kelas 12 dalam menghadapi ujian nasional</p>
-                        <a href="event.html" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Lihat Detail →</a>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-slate-900 mb-4">Seminar Motivasi</h3>
+                            <p class="text-slate-600 mb-6 leading-relaxed">Seminar motivasi untuk siswa kelas 12 dalam menghadapi ujian nasional dengan pembicara inspiratif</p>
+                            <a href="event.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors group">
+                                Lihat Detail 
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" style="animation-delay: 0.1s">
-                    <div class="h-48 bg-gradient-to-r from-green-500 to-teal-600 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <i class="fas fa-palette text-2xl"></i>
+                <div class="group card-hover scroll-reveal" style="animation-delay: 0.1s">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500">
+                        <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-palette text-white text-4xl opacity-80"></i>
+                            </div>
+                            <div class="absolute top-6 left-6">
+                                <span class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">20 Jan 2025</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-green-600 font-semibold mb-2">20 Januari 2025</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Lomba Kreativitas</h3>
-                        <p class="text-gray-600 mb-4">Kompetisi kreativitas antar kelas dalam berbagai kategori seni dan budaya</p>
-                        <a href="event.html" class="text-green-600 font-semibold hover:text-green-700 transition-colors">Lihat Detail →</a>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-slate-900 mb-4">Lomba Kreativitas</h3>
+                            <p class="text-slate-600 mb-6 leading-relaxed">Kompetisi kreativitas antar kelas dalam berbagai kategori seni dan budaya yang menginspirasi</p>
+                            <a href="event.html" class="inline-flex items-center text-green-600 font-semibold hover:text-green-700 transition-colors group">
+                                Lihat Detail 
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" style="animation-delay: 0.2s">
-                    <div class="h-48 bg-gradient-to-r from-orange-500 to-red-600 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <i class="fas fa-heart text-2xl"></i>
+                <div class="group card-hover scroll-reveal" style="animation-delay: 0.2s">
+                    <div class="bg-white/60 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500">
+                        <div class="h-64 bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-heart text-white text-4xl opacity-80"></i>
+                            </div>
+                            <div class="absolute top-6 left-6">
+                                <span class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">25 Jan 2025</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-orange-600 font-semibold mb-2">25 Januari 2025</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Bakti Sosial</h3>
-                        <p class="text-gray-600 mb-4">Kegiatan bakti sosial ke panti asuhan dan pembagian sembako</p>
-                        <a href="event.html" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">Lihat Detail →</a>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-slate-900 mb-4">Bakti Sosial</h3>
+                            <p class="text-slate-600 mb-6 leading-relaxed">Kegiatan bakti sosial ke panti asuhan dan pembagian sembako untuk masyarakat sekitar</p>
+                            <a href="event.html" class="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition-colors group">
+                                Lihat Detail 
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Documentation Section -->
-    <section class="py-20 bg-gray-50">
+     Modern about section with enhanced layout 
+    <section class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Dokumentasi Kegiatan</h2>
-                <p class="text-xl text-gray-600">Momen-momen berharga dari berbagai kegiatan OSIS</p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg scroll-reveal">
-                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-camera text-white text-3xl opacity-50"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg scroll-reveal" style="animation-delay: 0.1s">
-                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-users text-white text-3xl opacity-50"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg scroll-reveal" style="animation-delay: 0.2s">
-                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-trophy text-white text-3xl opacity-50"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg scroll-reveal" style="animation-delay: 0.3s">
-                    <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-star text-white text-3xl opacity-50"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-8 scroll-reveal">
-                <a href="dokumentasi.html" class="btn-primary bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                    Lihat Semua Dokumentasi
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="scroll-reveal">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Tentang POSMAR OSIS</h2>
-                    <p class="text-lg text-gray-600 mb-6">
-                        POSMAR (Organisasi Siswa Intra Sekolah) SMANSAR adalah wadah bagi seluruh siswa untuk 
-                        mengembangkan kreativitas, menyalurkan aspirasi, dan membangun kebersamaan dalam lingkungan sekolah.
+                    <div class="mb-8">
+                        <span class="text-blue-600 font-semibold text-lg">Tentang Kami</span>
+                        <h2 class="text-5xl font-display font-black text-slate-900 mt-4 mb-6">
+                            Dedicated to Creativity,<br>
+                            <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Culture & Growth</span>
+                        </h2>
+                    </div>
+                    
+                    <p class="text-xl text-slate-600 mb-8 leading-relaxed">
+                        POSMAR OSIS adalah wadah kreatif dimana siswa dan komunitas sekolah berkumpul untuk mendefinisikan identitas mereka, mengasah visi, dan mewujudkan masa depan yang gemilang.
                     </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3 scroll-reveal">
-                            <i class="fas fa-check-circle text-blue-600 mt-1"></i>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-lightbulb text-white"></i>
+                            </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Visi</h3>
-                                <p class="text-gray-600">Menjadi organisasi siswa yang kreatif, inovatif, dan berprestasi</p>
+                                <h3 class="text-xl font-display font-bold text-slate-900 mb-2">Visi Kami</h3>
+                                <p class="text-slate-600 leading-relaxed">Menjadi organisasi siswa yang kreatif, inovatif, dan berprestasi dalam mengembangkan potensi generasi muda.</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-3 scroll-reveal">
-                            <i class="fas fa-check-circle text-blue-600 mt-1"></i>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-target text-white"></i>
+                            </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Misi</h3>
-                                <p class="text-gray-600">Mengembangkan potensi siswa melalui berbagai kegiatan positif</p>
+                                <h3 class="text-xl font-display font-bold text-slate-900 mb-2">Misi Kami</h3>
+                                <p class="text-slate-600 leading-relaxed">Mengembangkan potensi siswa melalui berbagai kegiatan positif yang menginspirasi dan membangun karakter.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="scroll-reveal" style="animation-delay: 0.2s">
-                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl h-96 relative overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-6xl opacity-30"></i>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-3xl h-96 relative overflow-hidden shadow-2xl">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-white text-6xl opacity-60"></i>
+                            </div>
+                             Floating elements inside 
+                            <div class="floating-3d absolute top-8 left-8 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl"></div>
+                            <div class="floating-3d absolute bottom-8 right-8 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-3xl" style="animation-delay: -3s;"></div>
                         </div>
-                        <!-- Added floating elements inside the about image -->
-                        <div class="floating-element absolute top-10 left-10 w-8 h-8 bg-white/20 rounded-full"></div>
-                        <div class="floating-element absolute bottom-10 right-10 w-6 h-6 bg-white/30 rounded-full" style="animation-delay: -3s;"></div>
+                        
+                         Floating stats cards 
+                        <div class="absolute -bottom-6 -left-6 bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div class="text-2xl font-display font-black text-slate-900">500+</div>
+                            <div class="text-sm text-slate-600">Active Students</div>
+                        </div>
+                        
+                        <div class="absolute -top-6 -right-6 bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div class="text-2xl font-display font-black text-slate-900">25+</div>
+                            <div class="text-sm text-slate-600">Annual Events</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
-        <!-- Added animated background elements to footer -->
+     Modern footer with enhanced design 
+    <footer class="relative bg-slate-900 text-white py-20 overflow-hidden">
+         Animated background 
         <div class="absolute inset-0">
-            <div class="animate-spin-slow absolute top-10 left-10 w-32 h-32 border border-white/10 rounded-full"></div>
-            <div class="animate-spin-slow absolute bottom-10 right-10 w-24 h-24 border border-blue-500/20 rounded-full" style="animation-direction: reverse;"></div>
+            <div class="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
         </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-16">
                 <div class="scroll-reveal">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center floating-element">
-                            <i class="fas fa-graduation-cap text-white"></i>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center floating-element">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
                         </div>
-                        <span class="text-xl font-bold">POSMAR OSIS</span>
+                        <div>
+                            <span class="text-2xl font-display font-bold">POSMAR</span>
+                            <div class="text-slate-400 text-sm">OSIS SMANSAR</div>
+                        </div>
                     </div>
-                    <p class="text-gray-400">
-                        Organisasi Siswa Intra Sekolah SMANSAR yang berkomitmen untuk mengembangkan potensi siswa.
+                    <p class="text-slate-300 leading-relaxed mb-6">
+                        Organisasi Siswa Intra Sekolah yang berkomitmen untuk mengembangkan potensi dan kreativitas siswa melalui berbagai program inovatif.
                     </p>
-                </div>
-                
-                <div class="scroll-reveal">
-                    <h3 class="text-lg font-semibold mb-4">Kontak</h3>
-                    <div class="space-y-2 text-gray-400">
-                        <p class="hover:text-white transition-colors"><i class="fas fa-envelope mr-2"></i> osis@smansar.sch.id</p>
-                        <p class="hover:text-white transition-colors"><i class="fas fa-phone mr-2"></i> (021) 123-4567</p>
-                        <p class="hover:text-white transition-colors"><i class="fas fa-map-marker-alt mr-2"></i> SMANSAR, Jakarta</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
                     </div>
                 </div>
                 
                 <div class="scroll-reveal">
-                    <h3 class="text-lg font-semibold mb-4">Media Sosial</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
-                            <i class="fab fa-instagram text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
-                            <i class="fab fa-youtube text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
-                            <i class="fab fa-tiktok text-2xl"></i>
-                        </a>
+                    <h3 class="text-xl font-display font-bold mb-6">Kontak</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span>osis@smansar.sch.id</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors">
+                            <i class="fas fa-phone w-5"></i>
+                            <span>(021) 123-4567</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors">
+                            <i class="fas fa-map-marker-alt w-5"></i>
+                            <span>SMANSAR, Jakarta</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-reveal">
+                    <h3 class="text-xl font-display font-bold mb-6">Quick Links</h3>
+                    <div class="space-y-3">
+                        <a href="event.html" class="block text-slate-300 hover:text-white transition-colors">Event Terbaru</a>
+                        <a href="dokumentasi.html" class="block text-slate-300 hover:text-white transition-colors">Dokumentasi</a>
+                        <a href="forum.html" class="block text-slate-300 hover:text-white transition-colors">Forum Aspirasi</a>
+                        <a href="admin.html" class="block text-slate-300 hover:text-white transition-colors">Admin Dashboard</a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 POSMAR OSIS SMANSAR. All rights reserved.</p>
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-slate-400 text-sm">&copy; 2025 POSMAR OSIS SMANSAR. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

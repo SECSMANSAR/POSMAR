@@ -1,12 +1,11 @@
-// Main JavaScript functionality
-
 document.addEventListener("DOMContentLoaded", () => {
+  // Mobile menu functionality
   const mobileMenuBtn = document.getElementById("mobile-menu-btn")
   const mobileMenu = document.getElementById("mobile-menu")
   const mobileMenuIcon = document.getElementById("mobile-menu-icon")
   let isMenuOpen = false
 
-  mobileMenuBtn.addEventListener("click", () => {
+  mobileMenuBtn?.addEventListener("click", () => {
     isMenuOpen = !isMenuOpen
 
     if (isMenuOpen) {
@@ -22,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  // Close mobile menu when clicking links
   document.querySelectorAll(".mobile-menu-link").forEach((link) => {
     link.addEventListener("click", () => {
       isMenuOpen = false
@@ -32,17 +32,25 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Navbar scroll effect
   const navbar = document.getElementById("navbar")
-  window.addEventListener("scroll", () => {
+  let ticking = false
+
+  function updateNavbar() {
     if (window.scrollY > 50) {
       navbar.classList.add("nav-scrolled")
     } else {
       navbar.classList.remove("nav-scrolled")
     }
+    ticking = false
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNavbar)
+      ticking = true
+    }
   })
 
-  // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault()
@@ -56,20 +64,25 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Counter animation
   function animateCounters() {
     const counters = document.querySelectorAll("[data-count]:not([data-animated])")
 
     counters.forEach((counter) => {
       const target = Number.parseInt(counter.getAttribute("data-count"))
-      const duration = 2000 // 2 seconds
-      const increment = target / (duration / 16) // 60fps
-      let current = 0
+      const duration = 2500
+      const startTime = performance.now()
 
-      const updateCounter = () => {
-        current += increment
-        if (current < target) {
-          counter.textContent = Math.floor(current)
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime
+        const progress = Math.min(elapsed / duration, 1)
+
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+        const current = Math.floor(target * easeOutQuart)
+
+        counter.textContent = current
+
+        if (progress < 1) {
           requestAnimationFrame(updateCounter)
         } else {
           counter.textContent = target
@@ -77,31 +90,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      updateCounter()
+      requestAnimationFrame(updateCounter)
     })
   }
 
-  // Intersection Observer for animations
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
+    threshold: [0.1, 0.3, 0.5],
+    rootMargin: "0px 0px -100px 0px",
   }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        // Counter animation
         if (entry.target.classList.contains("animate-counter")) {
           entry.target.classList.add("visible")
-          // Animate counters when they come into view
           if (!entry.target.hasAttribute("data-animated")) {
-            entry.target.setAttribute("data-animated", "true")
-            setTimeout(() => animateCounters(), 200)
+            setTimeout(() => animateCounters(), 300)
           }
         }
 
+        // Scroll reveal animation
         if (entry.target.classList.contains("scroll-reveal")) {
           entry.target.classList.add("revealed")
         }
+
+        // Unobserve after animation to improve performance
+        observer.unobserve(entry.target)
       }
     })
   }, observerOptions)
@@ -111,56 +126,43 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el)
   })
 
-  // Add scroll reveal class to elements that should animate on scroll
-  document.querySelectorAll(".card-hover").forEach((card) => {
-    card.classList.add("scroll-reveal")
-  })
+  let parallaxTicking = false
 
-  // Parallax effect for floating elements
-  window.addEventListener("scroll", () => {
+  function updateParallax() {
     const scrolled = window.pageYOffset
-    const parallaxElements = document.querySelectorAll(".floating-element")
+    const parallaxElements = document.querySelectorAll(".floating-element, .floating-3d")
 
     parallaxElements.forEach((element, index) => {
-      const speed = 0.5 + index * 0.1
+      const speed = 0.3 + index * 0.1
       const yPos = -(scrolled * speed)
       element.style.transform = `translateY(${yPos}px)`
     })
-  })
 
-  // Add loading animation to images
-  document.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("load", function () {
-      this.style.opacity = "1"
-    })
+    parallaxTicking = false
+  }
 
-    // Add loading placeholder
-    if (!img.complete) {
-      img.style.opacity = "0"
-      img.style.transition = "opacity 0.3s ease"
+  window.addEventListener("scroll", () => {
+    if (!parallaxTicking) {
+      requestAnimationFrame(updateParallax)
+      parallaxTicking = true
     }
   })
 
-  // Add hover effects to buttons
-  document.querySelectorAll(".btn-primary, .btn-secondary").forEach((btn) => {
+  document.querySelectorAll(".btn-primary, .btn-secondary, button").forEach((btn) => {
+    // Hover effects
     btn.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-2px)"
+      this.style.transform = "translateY(-3px) scale(1.02)"
     })
 
     btn.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0)"
+      this.style.transform = "translateY(0) scale(1)"
     })
-  })
 
-  // Add ripple effect to buttons
-  document.querySelectorAll("button, .btn-primary, .btn-secondary").forEach((button) => {
-    // Ensure button has relative positioning for ripple effect
-    if (getComputedStyle(button).position === "static") {
-      button.style.position = "relative"
-    }
-    button.style.overflow = "hidden"
+    // Ripple effect
+    btn.style.position = "relative"
+    btn.style.overflow = "hidden"
 
-    button.addEventListener("click", function (e) {
+    btn.addEventListener("click", function (e) {
       const ripple = document.createElement("span")
       const rect = this.getBoundingClientRect()
       const size = Math.max(rect.width, rect.height)
@@ -182,26 +184,59 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  console.log("OSIS POSMAR website loaded successfully!")
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target
+        img.style.opacity = "1"
+        imageObserver.unobserve(img)
+      }
+    })
+  })
+
+  document.querySelectorAll("img").forEach((img) => {
+    img.style.opacity = "0"
+    img.style.transition = "opacity 0.5s ease"
+
+    img.addEventListener("load", function () {
+      this.style.opacity = "1"
+    })
+
+    if (!img.complete) {
+      imageObserver.observe(img)
+    }
+  })
+
+  if ("performance" in window) {
+    window.addEventListener("load", () => {
+      const loadTime = performance.now()
+      console.log(`🚀 POSMAR OSIS website loaded in ${Math.round(loadTime)}ms`)
+    })
+  }
+
+  window.addEventListener("error", (e) => {
+    console.error("Website error:", e.error)
+  })
+
+  console.log("✨ POSMAR OSIS - Modern website initialized successfully!")
 })
 
-// Add ripple CSS dynamically
 const style = document.createElement("style")
 style.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  
+  @keyframes ripple-animation {
+    to {
+      transform: scale(4);
+      opacity: 0;
     }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
+  }
 `
 document.head.appendChild(style)

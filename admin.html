@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - OSIS POSMAR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+     Navigation 
+    <nav class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <img src="/placeholder-logo.svg" alt="POSMAR Logo" class="h-10 w-10">
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-900">OSIS POSMAR</h1>
+                        <p class="text-sm text-gray-600">Admin Dashboard</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+     Login Form (Hidden by default) 
+    <div id="loginForm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="text-center mb-6">
+                <i class="fas fa-user-shield text-4xl text-blue-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800">Admin Login</h2>
+                <p class="text-gray-600">Masuk ke dashboard admin</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                    Login
+                </button>
+            </form>
+            <div id="loginError" class="mt-4 text-red-600 text-sm text-center hidden"></div>
+        </div>
+    </div>
+
+     Dashboard Content 
+    <div id="dashboardContent" class="hidden">
+        <div class="container mx-auto px-4 py-8">
+             Stats Cards 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center">
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-comments text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Total Aspirasi</h3>
+                            <p class="text-2xl font-bold text-blue-600" id="totalAspirasi">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center">
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Disetujui</h3>
+                            <p class="text-2xl font-bold text-green-600" id="approvedCount">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center">
+                        <div class="bg-yellow-100 p-3 rounded-full">
+                            <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Pending</h3>
+                            <p class="text-2xl font-bold text-yellow-600" id="pendingCount">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             Aspirasi List 
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-bold text-gray-800">Daftar Aspirasi</h2>
+                </div>
+                <div class="p-6">
+                    <div id="aspirasiList" class="space-y-4">
+                         Aspirasi items will be loaded here 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin credentials
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'posmar2025'
+        };
+
+        // Check if user is logged in
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            if (isLoggedIn) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                showDashboard();
+                errorDiv.classList.add('hidden');
+            } else {
+                errorDiv.textContent = 'Username atau password salah!';
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        // Show login form
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('dashboardContent').classList.add('hidden');
+        }
+
+        // Show dashboard
+        function showDashboard() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('dashboardContent').classList.remove('hidden');
+            loadAspirasi();
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            showLogin();
+        }
+
+        // Load aspirasi from localStorage
+        function loadAspirasi() {
+            const aspirasi = JSON.parse(localStorage.getItem('aspirasi') || '[]');
+            const aspirasiList = document.getElementById('aspirasiList');
+            
+            // Update stats
+            document.getElementById('totalAspirasi').textContent = aspirasi.length;
+            document.getElementById('approvedCount').textContent = aspirasi.filter(a => a.status === 'approved').length;
+            document.getElementById('pendingCount').textContent = aspirasi.filter(a => a.status === 'pending').length;
+
+            // Clear list
+            aspirasiList.innerHTML = '';
+
+            if (aspirasi.length === 0) {
+                aspirasiList.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada aspirasi yang masuk</p>';
+                return;
+            }
+
+            // Display aspirasi
+            aspirasi.forEach((item, index) => {
+                const aspirasiItem = document.createElement('div');
+                aspirasiItem.className = 'border border-gray-200 rounded-lg p-4';
+                aspirasiItem.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-800">${item.nama}</h3>
+                        <span class="px-2 py-1 rounded-full text-xs ${
+                            item.status === 'approved' ? 'bg-green-100 text-green-800' :
+                            item.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                            'bg-yellow-100 text-yellow-800'
+                        }">
+                            ${item.status === 'approved' ? 'Disetujui' :
+                              item.status === 'rejected' ? 'Ditolak' : 'Pending'}
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-2">${item.kelas}</p>
+                    <p class="text-gray-800 mb-3">${item.aspirasi}</p>
+                    <div class="flex space-x-2">
+                        ${item.status === 'pending' ? `
+                            <button onclick="updateStatus(${index}, 'approved')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                Setujui
+                            </button>
+                            <button onclick="updateStatus(${index}, 'rejected')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                Tolak
+                            </button>
+                        ` : ''}
+                        <button onclick="deleteAspirasi(${index})" class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                            Hapus
+                        </button>
+                    </div>
+                `;
+                aspirasiList.appendChild(aspirasiItem);
+            });
+        }
+
+        // Update aspirasi status
+        function updateStatus(index, status) {
+            const aspirasi = JSON.parse(localStorage.getItem('aspirasi') || '[]');
+            aspirasi[index].status = status;
+            localStorage.setItem('aspirasi', JSON.stringify(aspirasi));
+            loadAspirasi();
+        }
+
+        // Delete aspirasi
+        function deleteAspirasi(index) {
+            if (confirm('Yakin ingin menghapus aspirasi ini?')) {
+                const aspirasi = JSON.parse(localStorage.getItem('aspirasi') || '[]');
+                aspirasi.splice(index, 1);
+                localStorage.setItem('aspirasi', JSON.stringify(aspirasi));
+                loadAspirasi();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', checkAuth);
+    </script>
+</body>
+</html>
